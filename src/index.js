@@ -1,5 +1,7 @@
-let miniCarto = {
-    a: 1
-}
+import { Map } from './Map';
 
-export default miniCarto;
+const miniCarto = {
+    Map
+};
+
+export { miniCarto };
