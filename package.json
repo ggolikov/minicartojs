@@ -7,39 +7,23 @@
   "author": "Grigory Golikov gr.golikov@gmail.com",
   "license": "MIT",
   "scripts": {
-    "watch": "watchify -v -d demo/js/app.js -o demo/js/bundle.js",
-    "lint": "eslint ./src/index.js",
-    "build-js": "cat ./src/index.js > ./dist/mini-carto-src.js",
-    "compress": "uglifyjs ./dist/mini-carto-src.js -o ./dist/mini-carto.js -m --comments",
-    "server": "live-server --port=9000 --host=localhost --watch=demo",
-    "start": "npm-run-all --parallel watch server",
+    "build": "rollup -c",
+    "watch": "rollup -c -w",
+    "dev": "npm-run-all --parallel start watch",
+    "start": "serve demo",
     "deploy": "gh-pages -d demo"
   },
-  "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "@babel/preset-env"
-          ]
-        }
-      ]
-    ]
-  },
   "dependencies": {
-    "leaflet": "^1.4.0"
+    "leaflet": "^1.4.0",
+    "ol": "^5.3.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.3",
-    "babelify": "^10.0.0",
-    "browserify": "^13.1.1",
-    "eslint": "^4.19.1",
-    "gh-pages": "^1.0.0",
-    "live-server": "^1.2.0",
-    "npm-run-all": "^4.0.1",
-    "uglifyjs": "^2.4.10",
-    "watchify": "^3.7.0"
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.20.3",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.1.0",
+    "rollup-plugin-terser": "^5.0.0",
+    "serve": "^11.0.2",
+    "gh-pages": "^1.0.0"
   }
 }

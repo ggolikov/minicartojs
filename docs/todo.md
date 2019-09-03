@@ -15,7 +15,10 @@ This is quite a lot of work, but we think it’s interesting! There’s no time 
 
 ```
 {
+  // new Map();
+  // map.setCenter();
   "center":"[52.5897007687178, 52.734375]",
+  // map.setZoom();
   "zoom":4,
   "maps_api_config": {
     "user_name": "documentation",
@@ -54,6 +57,9 @@ This is quite a lot of work, but we think it’s interesting! There’s no time 
 1. Определяем наборы провайдеров
 2. Определяем наборы классов, которые нам нужны - Map,
 3. Определяем базовый класс, который будет инициализировать фабрику
+
+1. читаем конфиг, генерируем классы
+2. генерируем классы, читаем конфиг, определяем параметры карты и слоев
 
 
 Конфиг содержит следующие классы:

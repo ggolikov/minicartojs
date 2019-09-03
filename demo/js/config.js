@@ -32,6 +32,6 @@ const config = {
       "type": "tiled"
     }
   ],
-}
+};
 
 export default config;

@@ -1,15 +1,29 @@
+import createMap from '../map';
+
 class MiniCarto {
     constructor(provider) {
-        this.providres = [
+        this.providers = [
+            'ol',
             'leaflet',
-            'openlayers',
         ];
 
-        this.setProvider(provider = this.providres[0]);
+        this.setProvider(provider = this.providers[0]);
+    }
+
+    init(elem, config) {
+        let { center, zoom } = config;
+        this.elem = elem;
+        this.config = config;
+        // HACK
+        center = Array.isArray(center) ? center : JSON.parse(center);
+        this.map = createMap(elem, { center, zoom }, this.provider);
+        console.log(this.map);
     }
 
     setProvider(provider) {
-        console.log(provider);
+        this.provider = provider;
+
+        // this._init()
     }
 }
 

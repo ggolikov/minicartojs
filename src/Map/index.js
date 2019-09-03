@@ -1,14 +1,20 @@
-import { LibraryProvider } from '../LibraryProvider';
+import createLeafletMap from './createLeafletMap';
+import createOlMap from './createOlMap';
 
-export class Map {
-    constructor() {
-        this._library = new LibraryProvider(libraryType);
-        console.log(this._library);
-
-        this._readConfig(mapConfig);
+const createMap = (elem, config, provider)  => {
+    let map;
+    console.log(config);
+    switch (provider) {
+        case 'leaflet':
+            map = createLeafletMap(elem, config);
+            break;
+        case 'ol':
+            map = createOlMap(elem, config);
+            break;
+        default:
     }
 
-    _readConfig(config) {
-        console.log(config);
-    }
+    return map;
 }
+
+export default createMap;
