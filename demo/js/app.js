@@ -1,10 +1,8 @@
-import { miniCarto } from '../../src/index.js';
+import MiniCarto from '../../src/index.js';
 import config from './config.js';
 import L from 'leaflet';
 
+let miniCarto = new MiniCarto();
 window.miniCarto = miniCarto;
+
 console.log(miniCarto);
-
-let map = new miniCarto.Map(config);
-
-console.log(map);

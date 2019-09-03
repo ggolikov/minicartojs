@@ -1,7 +1,7 @@
 import { LibraryProvider } from '../LibraryProvider';
 
 export class Map {
-    constructor(mapConfig, libraryType = 'Leaflet') {
+    constructor() {
         this._library = new LibraryProvider(libraryType);
         console.log(this._library);
 

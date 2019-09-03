@@ -1,7 +1,4 @@
-import { Map } from './Map';
+// import { Map } from './Map';
+import MiniCarto from './core';
 
-const miniCarto = {
-    Map
-};
-
-export { miniCarto };
+export default MiniCarto;
