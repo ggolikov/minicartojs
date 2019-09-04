@@ -5,5 +5,5 @@ window.miniCarto = miniCarto;
 
 let container = document.getElementById('map');
 
-miniCarto.init(container, config);
+miniCarto.init(config, container, 'ol');
 console.log(miniCarto);

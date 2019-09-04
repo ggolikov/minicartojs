@@ -3,7 +3,6 @@ import createOlMap from './createOlMap';
 
 const createMap = (elem, config, provider)  => {
     let map;
-    console.log(config);
     switch (provider) {
         case 'leaflet':
             map = createLeafletMap(elem, config);

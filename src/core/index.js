@@ -3,27 +3,40 @@ import createMap from '../map';
 class MiniCarto {
     constructor(provider) {
         this.providers = [
-            'ol',
             'leaflet',
+            'ol',
         ];
-
-        this.setProvider(provider = this.providers[0]);
     }
 
-    init(elem, config) {
-        let { center, zoom } = config;
+    init(config, elem, provider) {
         this.elem = elem;
+        this._initialClassName = elem.className;
         this.config = config;
-        // HACK
-        center = Array.isArray(center) ? center : JSON.parse(center);
-        this.map = createMap(elem, { center, zoom }, this.provider);
-        console.log(this.map);
+        this.setProvider(provider = 'leaflet');
     }
 
     setProvider(provider) {
-        this.provider = provider;
+        // clear elem
+        let elem = this.elem;
+        console.log(elem);
+        let elemClone = elem.cloneNode(true);
+        // console.log(elemClone);
+        elemClone.innerHTML = '';
+        elemClone.className = this._initialClassName;
+        // elem.parentNode.appendChild(elemClone);
+        // elem.parentNode.insertBefore(elemClone, elem);
+        // elem.parentNode.removeChild(elem);
+        elem.parentNode.replaceChild(elemClone, elem);
+        // elem.className = '';
+        console.log(elemClone);
+        this.elem = elemClone;
 
-        // this._init()
+        console.log(provider);
+        let { center, zoom } = this.config;
+        this.provider = provider;
+        center = Array.isArray(center) ? center : JSON.parse(center);
+        this.map = createMap(this.elem, { center, zoom }, this.provider);
+        // console.log(this.map);
     }
 }
 
