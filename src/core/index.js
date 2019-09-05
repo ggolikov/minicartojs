@@ -1,81 +1,98 @@
 import { Map } from '../map';
 import { Layer } from '../layer';
-import createMap from '../map';
+import { MAPS_API_URL, TEMPLATE_URL } from '../constants';
 
 const core = {
-    providers: [
+    _providers: [
         'leaflet',
         'ol',
     ],
 
-    init: function (config, container, provider) {
-        this.container = container;
+    init: function (config = {}, container, provider = 'leaflet') {
+        this._container = container;
         this._initialClassName = container.className;
-        this.config = config;
-        this.setProvider(provider = 'leaflet');
+        this._config = config;
+        this._requestAPIUrl(config)
+            .then(res => {
+                let { maps_api_config } = config,
+                    { user_name, maps_api_template } = maps_api_config;
+
+                config.layers.forEach(layer => {
+                    if (!("urlTemplate" in layer.options)) {
+                        layer.options.urlTemplate = `${TEMPLATE_URL}/${user_name}/api/v1/map/${res.layergroupid}/{z}/{x}/{y}.png`;
+                    }
+                });
+                console.log(config);
+                this.setProvider(provider);
+            });
     },
 
     setProvider: function (provider) {
-        this._map = new Map();
-        this._layer = new Layer();
-        // clear elem
+        this._provider = provider;
 
-        console.log(provider);
-        let { center, zoom } = this.config;
-        this.provider = provider;
-        center = Array.isArray(center) ? center : JSON.parse(center);
-        this._clearContainer();
-        this.map = createMap(this.container, { center, zoom }, this.provider);
+        let map = this.createMap(),
+            config = this._config;
+
+        if ("layers" in config) {
+            for (let i = 0, len = config.layers.length; i < len; i++) {
+                let layer = this.createLayer(config.layers[i]);
+                map.addLayer(layer);
+            }
+        }
+
+        this._map = map;
     },
 
-    _clearContainer() {
-        let container = this.container;
+    createMap: function () {
+        let { center, zoom } = this._config;
+        center = Array.isArray(center) ? center : JSON.parse(center);
+        this._clearContainer();
+
+        return new Map(this._container, { center, zoom }, this._provider);
+    },
+
+    createLayer: function (options) {
+        return new Layer(options, this._provider);
+    },
+
+    _clearContainer: function () {
+        let container = this._container;
         let containerClone = container.cloneNode(true);
         containerClone.innerHTML = '';
         containerClone.className = this._initialClassName;
         container.parentNode.replaceChild(containerClone, container);
-        this.container = containerClone;
-    }
+        this._container = containerClone;
+    },
 
-}
+    _requestAPIUrl: function (config) {
+        let layers = config.layers.map(layer => {
+            let { type } = layer;
 
-class MiniCarto {
-    constructor(provider) {
-        this.providers = [
-            'leaflet',
-            'ol',
-        ];
-    }
+            if (type === 'tiled') {
+                return {
+                    type: 'http',
+                    options: {
+                        urlTemplate: layer.options.urlTemplate
+                    }
+                }
+            } else if (type === 'CartoDB') {
+                return {
+                    type: "mapnik",
+                    options: layer.options
+                }
+            }
+        });
 
-    init(config, elem, provider) {
-        this.elem = elem;
-        this._initialClassName = elem.className;
-        this.config = config;
-        this.setProvider(provider = 'leaflet');
-    }
+        let requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({layers})
+        };
 
-    setProvider(provider) {
-        // clear elem
-        let elem = this.elem;
-        console.log(elem);
-        let elemClone = elem.cloneNode(true);
-        // console.log(elemClone);
-        elemClone.innerHTML = '';
-        elemClone.className = this._initialClassName;
-        // elem.parentNode.appendChild(elemClone);
-        // elem.parentNode.insertBefore(elemClone, elem);
-        // elem.parentNode.removeChild(elem);
-        elem.parentNode.replaceChild(elemClone, elem);
-        // elem.className = '';
-        console.log(elemClone);
-        this.elem = elemClone;
-
-        console.log(provider);
-        let { center, zoom } = this.config;
-        this.provider = provider;
-        center = Array.isArray(center) ? center : JSON.parse(center);
-        this.map = createMap(this.elem, { center, zoom }, this.provider);
-        // console.log(this.map);
+        return fetch(MAPS_API_URL, requestOptions)
+            .then(res => res.json())
     }
 }
 
@@ -84,5 +101,3 @@ export default {
     Map,
     Layer
 }
-
-// export default MiniCarto;

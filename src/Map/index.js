@@ -1,24 +1,26 @@
 import createLeafletMap from './createLeafletMap';
 import createOlMap from './createOlMap';
 
-const createMap = (elem, config, provider)  => {
-    let map;
-    switch (provider) {
-        case 'leaflet':
-            map = createLeafletMap(elem, config);
-            break;
-        case 'ol':
-            map = createOlMap(elem, config);
-            break;
-        default:
+class Map {
+    constructor(container, options, provider) {
+        let map;
+        switch (provider) {
+            case 'leaflet':
+                map = createLeafletMap(container, options);
+                break;
+            case 'ol':
+                map = createOlMap(container, options);
+                break;
+            default:
+        }
+
+        this._provider = provider;
+        this._map = map;
     }
 
-    return map;
-}
-
-class Map {
-    constructor() {
-        this.layerType = 'carto';
+    addLayer(layer) {
+        console.log(layer);
+        this._map.addLayer(layer);
     }
 }
 
