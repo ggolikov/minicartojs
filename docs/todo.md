@@ -77,3 +77,9 @@ constructor |  | должен инициализировать список пр
 init | config | читает конфигурационный файл
 setProvider |  | должен приводить к полной перерисовке карты
 getProvider |
+
+- src
+    - core
+    - map
+    - layer
+    - index.js

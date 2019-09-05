@@ -16,4 +16,12 @@ const createMap = (elem, config, provider)  => {
     return map;
 }
 
+class Map {
+    constructor() {
+        this.layerType = 'carto';
+    }
+}
+
+export { Map };
+
 export default createMap;
