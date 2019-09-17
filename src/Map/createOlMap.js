@@ -12,4 +12,7 @@ const createOlMap = (target, options)  => {
     });
 }
 
+
+    
+
 export default createOlMap;

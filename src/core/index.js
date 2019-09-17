@@ -43,6 +43,7 @@ const core = {
         this._map = map;
     },
 
+    // вынести в фабрику
     createMap: function () {
         let { center, zoom } = this._config;
         center = Array.isArray(center) ? center : JSON.parse(center);
@@ -51,6 +52,7 @@ const core = {
         return new Map(this._container, { center, zoom }, this._provider);
     },
 
+    // вынести в фабрику
     createLayer: function (options) {
         return new Layer(options, this._provider);
     },
