@@ -1,9 +1,10 @@
 import L from 'leaflet';
-import Map from './Map';
+import AbstractMap from './AbstractMap';
 
-export default class LeafletMap extends Map {
-    constructor() {
-        this._map = L.map();
+export default class LeafletMap extends AbstractMap {
+    constructor(container, options) {
+        super();
+        this._map = L.map(container, options);
         return this._map;
     }
 

@@ -1,7 +1,17 @@
-export default class LeafletFactory {
-    constructor() { }
+import AbstractFactory from './AbstractFactory';
+import { LeafletMap } from '../Map';
+import { LeafletTileLayer } from '../TileLayer';
 
-    createMap() { }
+export default class LeafletFactory extends AbstractFactory {
+    constructor() { 
+        super();
+    }
 
-    createLayer() { }
+    createMap(container, options) { 
+        return new LeafletMap(container, options);
+    }
+
+    createTileLayer(layerData) {
+        return new LeafletTileLayer(layerData.options.urlTemplate);
+    }
 }

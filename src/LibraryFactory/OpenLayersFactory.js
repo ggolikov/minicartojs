@@ -1,7 +1,17 @@
-export default class OpenLayersFactory {
-    constructor() { }
+import AbstractFactory from './AbstractFactory';
+import { OpenLayersMap } from '../Map';
+import { OpenLayersTileLayer } from '../TileLayer';
 
-    createMap() { }
+export default class OpenLayersFactory extends AbstractFactory {
+    constructor() { 
+        super();
+    }
 
-    createLayer() { }
+    createMap(container, options) {
+        return new OpenLayersMap(container, options);
+    }
+
+    createTileLayer(layerData) {
+        return new OpenLayersTileLayer(layerData);
+    }
 }

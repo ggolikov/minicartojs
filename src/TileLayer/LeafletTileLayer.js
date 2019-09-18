@@ -1,9 +1,10 @@
 import L from 'leaflet';
-import TileLayer from './TileLayer';
+import AbstractTileLayer from './AbstractTileLayer';
 
-export default class LeafletTileLayer extends TileLayer {
-    constructor() {
-        this._layer = L.tileLayer();
+export default class LeafletTileLayer extends AbstractTileLayer {
+    constructor(url) {
+        super(url);
+        this._layer = L.tileLayer(url);
         return this._layer;
     }
 }

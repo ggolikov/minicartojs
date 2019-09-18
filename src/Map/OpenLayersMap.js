@@ -1,10 +1,11 @@
-import * as OlMap from 'ol/Map';
+import AbstractMap from './AbstractMap';
+import Map from 'ol/Map';
 import View from 'ol/View';
-import Map from './Map';
 
-export default class OpenLayersMap extends Map {
+export default class OpenLayersMap extends AbstractMap {
     constructor() {
-        this._map = new OlMap({
+        super();
+        this._map = new Map({
             // target,
             // view: new View({
                 // center,

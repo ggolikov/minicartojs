@@ -1,5 +1,5 @@
-import { Map } from '../Map';
-import { Layer } from '../TileLayer';
+// import { Map } from '../Map';
+// import { Layer } from '../TileLayer';
 import LibraryFactory from '../LibraryFactory';
 import { MAPS_API_URL, TEMPLATE_URL } from '../constants';
 
@@ -9,9 +9,8 @@ const core = {
         'ol',
     ],
 
-    init: function (config = {}, container, provider = 'leaflet') {
-        let factory = LibraryFactory.createFactory(provider);
-        console.log(factory);
+    init: function (config = {}, container, library = 'leaflet') {
+
         this._container = container;
         this._initialClassName = container.className;
         this._config = config;
@@ -26,38 +25,30 @@ const core = {
                     }
                 });
                 console.log(config);
-                this.setProvider(provider);
+                this.setLibrary(library);
             });
     },
 
-    setProvider: function (provider) {
-        this._provider = provider;
+    setLibrary: function (library) {
+        this._library = library;
+        let factory = LibraryFactory.createFactory(library);
+            console.log(factory);
+        let { center, zoom } = this._config;
+            center = Array.isArray(center) ? center : JSON.parse(center);
+            this._clearContainer();
 
-        let map = this.createMap(),
+
+        let map = factory.createMap(this._container, { center, zoom }),
             config = this._config;
 
         if ("layers" in config) {
             for (let i = 0, len = config.layers.length; i < len; i++) {
-                let layer = this.createLayer(config.layers[i]);
+                let layer = factory.createLayer(config.layers[i]);
                 map.addLayer(layer);
             }
         }
 
         this._map = map;
-    },
-
-    // вынести в фабрику
-    createMap: function () {
-        let { center, zoom } = this._config;
-        center = Array.isArray(center) ? center : JSON.parse(center);
-        this._clearContainer();
-
-        return new Map(this._container, { center, zoom }, this._provider);
-    },
-
-    // вынести в фабрику
-    createLayer: function (options) {
-        return new Layer(options, this._provider);
     },
 
     _clearContainer: function () {
@@ -97,12 +88,12 @@ const core = {
         };
 
         return fetch(MAPS_API_URL, requestOptions)
-            .then(res => res.json())
+            .then(res => res.json());
     }
 }
 
 export default {
     core,
-    Map,
-    Layer
+    // Map,
+    // Layer
 }
