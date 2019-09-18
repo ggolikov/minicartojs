@@ -1,5 +1,6 @@
 /.vscode
 /demo/js/bundle.js
+/demo/js/bundle.js.map
 /node_modules
 .log
 .eslintrc.js

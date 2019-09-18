@@ -1,5 +1,6 @@
-import { Map } from '../map';
-import { Layer } from '../layer';
+import { Map } from '../Map';
+import { Layer } from '../TileLayer';
+import LibraryFactory from '../LibraryFactory';
 import { MAPS_API_URL, TEMPLATE_URL } from '../constants';
 
 const core = {
@@ -9,6 +10,8 @@ const core = {
     ],
 
     init: function (config = {}, container, provider = 'leaflet') {
+        let factory = LibraryFactory.createFactory(provider);
+        console.log(factory);
         this._container = container;
         this._initialClassName = container.className;
         this._config = config;
