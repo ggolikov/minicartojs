@@ -3,16 +3,19 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 
 export default class OpenLayersMap extends AbstractMap {
-    constructor() {
-        super();
+    constructor(container, options) {
+        super(container, options);
+        
+        let { center, zoom } = options;
         this._map = new Map({
-            // target,
-            // view: new View({
-                // center,
-                // zoom
-            // })
+            container,
+            view: new View({
+                center,
+                zoom
+            })
         });
-            return this._map;
+        
+        return this._map;
     }
 
     addLayer(layer) {

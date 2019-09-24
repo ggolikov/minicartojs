@@ -5,5 +5,5 @@ window.miniCarto = miniCarto;
 console.log(miniCarto);
 let container = document.getElementById('map');
 
-miniCarto.core.init(config, container, 'leaflet');
+miniCarto.core.init(config, container, 'openLayers');
 // console.log(miniCarto);

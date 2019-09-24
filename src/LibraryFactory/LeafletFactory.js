@@ -7,7 +7,7 @@ export default class LeafletFactory extends AbstractFactory {
         super();
     }
 
-    createMap(container, options) { 
+    createMap(container, options) {
         return new LeafletMap(container, options);
     }
 
