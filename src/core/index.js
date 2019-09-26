@@ -39,6 +39,10 @@ const core = {
         this._map = map;
     },
 
+    getMap() {
+        return this._map;
+    },
+
     _requestAPIUrl: function (config) {
         let layers = config.layers.map(layer => {
             let { type } = layer;

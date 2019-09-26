@@ -1,19 +1,36 @@
 export default class AbstractMap {
     constructor(container, options) {
+        this._layers = new Map();
         this._initialClassName = container.className;
-        this._container = container; 
+        this._container = this._resetMapContainer(container); 
         this._options = options; 
-        // this._clearContainer();
     }
 
-    _clearContainer() {
-        let containerClone = this._container.cloneNode(true);
-        containerClone.innerHTML = '';
-        console.log(this._initialClassName);
-        // containerClone.className = this._initialClassName;
-        this._container.parentNode.replaceChild(containerClone, this._container);
-        this._container = containerClone;
+    addLayer(layer) {
+        if (!this._layers.has(layer)) {
+            this._layers.set(layer, null);
+        } 
     }
-    // ...common map methods
+
+    removeLayer(layer) {
+        if (this._layers.has(layer)) {
+            this._layers.delete(layer);
+        } 
+    }
+
+    getLayers() {
+        return Array.from(this._layers.keys());
+    }
+
+    _resetMapContainer(container) {
+        let innerContainer = document.createElement('div');
+        
+        innerContainer.style = 'width: 100%; height: 100%';
+        
+        container.innerHTML = '';
+        container.appendChild(innerContainer);
+
+        return innerContainer;
+    }
 }
 

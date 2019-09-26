@@ -1,5 +1,10 @@
 export default class AbstractTileLayer {
-    constructor(url) {
+    constructor(layerData) {
+        let { options } = layerData;
+        this._options = options;
     }
-    // ...common layer methods
+
+    setVisibility() {
+
+    }
 }

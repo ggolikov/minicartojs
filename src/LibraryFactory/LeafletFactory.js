@@ -12,6 +12,6 @@ export default class LeafletFactory extends AbstractFactory {
     }
 
     createTileLayer(layerData) {
-        return new LeafletTileLayer(layerData.options.urlTemplate);
+        return new LeafletTileLayer(layerData);
     }
 }

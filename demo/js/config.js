@@ -8,7 +8,7 @@ const config = {
   "layers":[
     {
       "type":"tiled",
-      "options":{     "urlTemplate":"http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+      "options":{     "urlTemplate":"http://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
         "minZoom":"0",
         "maxZoom":"18",
         "attribution":"&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
@@ -24,7 +24,7 @@ const config = {
     },
     {
       "options": {
-        "urlTemplate": "http://{s}.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png",
+        "urlTemplate": "http://c.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}.png",
         "minZoom": "0",
         "maxZoom": "18",
         "attribution": "&copy; <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors"
