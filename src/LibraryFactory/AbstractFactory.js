@@ -7,9 +7,9 @@ export default class AbstractFactory {
 
     }
 
-    createLayer(layerData) {
+    createLayer(layerData, map) {
         if (layerData.type === 'tiled' || layerData.type === 'CartoDB') {
-            return this.createTileLayer(layerData);
+            return this.createTileLayer(layerData, map);
         }
     }
 }

@@ -1,10 +1,9 @@
-// import { Map } from '../Map';
-// import { Layer } from '../TileLayer';
 import LibraryFactory from '../LibraryFactory';
+import EventTarget from '../EventTarget';
 import { MAPS_API_URL, TEMPLATE_URL } from '../constants';
 
-const core = {
-     init: function (config = {}, container, library = 'leaflet') {
+class MiniCarto extends EventTarget {
+    init(config = {}, container, library = 'leaflet') {
         this._container = container;
         this._config = config;
         this._requestAPIUrl(config)
@@ -19,31 +18,34 @@ const core = {
                 });
                 this.setLibrary(library);
             });
-    },
-
-    setLibrary: function (library) {
+            
+        this.fire('init');
+        }
+        
+    setLibrary(library) {
         this._library = library;
         let factory = LibraryFactory.createFactory(library);
         let { center, zoom } = this._config;
-            center = Array.isArray(center) ? center : JSON.parse(center);
+        center = Array.isArray(center) ? center : JSON.parse(center);
 
         let map = factory.createMap(this._container, { center, zoom }),
             config = this._config;
-
+            
         if ("layers" in config) {
             for (let i = 0, len = config.layers.length; i < len; i++) {
-                map.addLayer(factory.createLayer(config.layers[i]));
+                map.addLayer(factory.createLayer(config.layers[i], map));
             }
         }
-
+        
         this._map = map;
-    },
+        this.fire('setLibrary');
+    }
 
     getMap() {
         return this._map;
-    },
+    }
 
-    _requestAPIUrl: function (config) {
+    _requestAPIUrl(config) {
         let layers = config.layers.map(layer => {
             let { type } = layer;
 
@@ -75,8 +77,4 @@ const core = {
     }
 }
 
-export default {
-    core,
-    // Map,
-    // Layer
-}
+export default new MiniCarto();

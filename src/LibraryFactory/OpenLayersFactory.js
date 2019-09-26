@@ -11,7 +11,7 @@ export default class OpenLayersFactory extends AbstractFactory {
         return new OpenLayersMap(container, options);
     }
 
-    createTileLayer(layerData) {
-        return new OpenLayersTileLayer(layerData);
+    createTileLayer(layerData, map) {
+        return new OpenLayersTileLayer(layerData, map);
     }
 }
