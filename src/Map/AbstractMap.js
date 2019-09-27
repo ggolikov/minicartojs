@@ -9,17 +9,33 @@ export default class AbstractMap {
     addLayer(layer) {
         if (!this._layers.has(layer)) {
             this._layers.set(layer, null);
-        } 
+
+            layer.setMap(this); 
+        }
     }
 
     removeLayer(layer) {
         if (this._layers.has(layer)) {
             this._layers.delete(layer);
-        } 
+
+            layer.setMap(null);
+        }
+    }
+
+    hasLayer(layer) {
+        return this._layers.get(layer);
+    }
+
+    layerOnMap() {
+        
     }
 
     getLayers() {
         return Array.from(this._layers.keys());
+    }
+
+    getOptions() {
+        return this._options;
     }
 
     _resetMapContainer(container) {

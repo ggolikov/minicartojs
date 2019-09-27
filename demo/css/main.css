@@ -10,19 +10,21 @@ body {
 }
 
 #wrap {
+    display: flex;
     width: 100%;
     height: 100%;
     margin: 0;
 }
 
 #left-panel {
-    display: none;
+    /* display: none; */
     width: 300px;
     height: 100%;
     float: left;
 }
 
-#map {
+#mapContainer {
+    width: calc(100% - 300px);
     height: 100%;
 }
 
@@ -32,4 +34,12 @@ body {
 
 .header {
     text-align: center;
+}
+
+.row {
+    justify-content: center;
+}
+
+#visibilityContainer {
+    flex-direction: column;
 }

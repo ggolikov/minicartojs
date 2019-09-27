@@ -16,8 +16,6 @@ export default class OpenLayersMap extends AbstractMap {
             }),
             target: this._container
         });
-        
-        // return this._map;
     }
 
     addLayer(layer) {

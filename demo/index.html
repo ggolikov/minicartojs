@@ -15,11 +15,31 @@
     <div id="wrap">
         <div id="left-panel">
             <div class="container">
-            </div>
-            <div id="content">
+                <h2 class="header">miniCarto.js demo</h2>
+                <h5 class="header">Select render library</h5>
+                <div class="row">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="leaflet" value="leaflet" checked>
+                        <label class="form-check-label" for="leaflet">Leaflet</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="openLayers" value="openLayers">
+                        <label class="form-check-label" for="openLayers">OpenLayers</label>
+                    </div>
+                </div>
+                <h5 class="header">Set layers visibility</h5>
+                    <div class="row" id="legend">
+                        <div class="row" id="visibilityContainer">
+                        </div>
+                    </div>
+                <h5 class="header">Update sql attribute</h5>
+                    <div class="row" id="sql">
+                        <div class="row" id="sqlEditorContainer">
+                        </div>
+                    </div>
             </div>
         </div>
-        <div id="map">
+        <div id="mapContainer">
         </div>
     </div>
     <script src="./js/bundle.js"></script>

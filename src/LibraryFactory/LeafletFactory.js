@@ -11,7 +11,7 @@ export default class LeafletFactory extends AbstractFactory {
         return new LeafletMap(container, options);
     }
 
-    createTileLayer(layerData) {
-        return new LeafletTileLayer(layerData);
+    createTileLayer(layerData, map) {
+        return new LeafletTileLayer(layerData, map);
     }
 }
