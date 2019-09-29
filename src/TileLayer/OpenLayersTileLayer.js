@@ -10,9 +10,9 @@ export default class OpenLayersTileLayer extends AbstractTileLayer {
     }
 
     createLayer() {
-        this._layer = new TileLayer({
+        this.libraryLayer = new TileLayer({
             source: new XYZ({
-                url: this.getOptions().urlTemplate
+                url: this.options.urlTemplate
             })
         })
     }
@@ -20,13 +20,9 @@ export default class OpenLayersTileLayer extends AbstractTileLayer {
     redraw() {
         return this.getUrlTemplate()
             .then(() => {
-                let libraryMap = this.getLibraryMap();
-
                 if (this.layerOnMap()) {
-                    libraryMap.removeLayer(this.getLibraryLayer());
-                    
-                    this.getLibraryLayer().setSource(new XYZ({
-                        url: this.getOptions().urlTemplate
+                    this.libraryLayer.setSource(new XYZ({
+                        url: this.options.urlTemplate
                     }));
                 } else {
                     this.createLayer();
@@ -37,13 +33,13 @@ export default class OpenLayersTileLayer extends AbstractTileLayer {
     }
 
     layerOnMap() {
-        let libraryMap = this.getLibraryMap(),
+        let { libraryMap } = this,
             libraryLayers = libraryMap.getLayers().getArray();
 
-        return !!libraryLayers.find(l => l === this.getLibraryLayer());
+        return !!libraryLayers.find(l => l === this.libraryLayer);
     }
 
     setVisibility(visible) {
-        this._layer.setVisible(visible);
+        this.libraryLayer.setVisible(visible);
     }
 }

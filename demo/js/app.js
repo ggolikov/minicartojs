@@ -40,20 +40,20 @@ function updateMapLegend(layerDescription, index) {
 }
 
 function setLayerVisibility(e) {
-    let map = miniCarto.getMap(),
-        layers = map.getLayers();
+    let { map } = miniCarto,
+        { layers } = map;
 
     layers[e.target.id].setVisibility(e.target.checked);
 }
 
 function createSqlEditor() {
-    let map = miniCarto.getMap(),
-        layers = map.getLayers();
+    let { map } = miniCarto,
+        { layers } = map;
 
     sqlEditorContainer.innerHTML = '';
     
-    let cartoDBLayer = layers.find(l => l.getType() === 'CartoDB'),
-        options = cartoDBLayer.getOptions(),
+    let cartoDBLayer = layers.find(l => l.type === 'CartoDB'),
+        options = cartoDBLayer.options,
         { sql } = options;
 
     sqlEditorContainer.innerHTML += `
@@ -72,7 +72,7 @@ function setLibrary(e) {
 }
 
 function setSQL(layer, e) {
-    let updatedOtions = JSON.parse(JSON.stringify(layer.getOptions()));
+    let updatedOtions = JSON.parse(JSON.stringify(layer.options));
     updatedOtions.sql = e.target.value;
 
     layer.update(updatedOtions);

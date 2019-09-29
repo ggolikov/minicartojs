@@ -6,19 +6,41 @@ export default class AbstractMap {
         this._options = options; 
     }
 
+    get libraryMap() {
+        return this._libraryMap;
+    }
+
+    get layers() {
+        return Array.from(this._layers.keys());
+    }
+
+    get options() {
+        return this._options;
+    }
+
+    get container() {
+        return this._container;
+    }
+
+    set libraryMap(map) {
+        this._libraryMap = map;
+    }
+
     addLayer(layer) {
         if (!this._layers.has(layer)) {
             this._layers.set(layer, null);
 
-            layer.setMap(this); 
+            layer.map = this; 
         }
+     
+        this.libraryMap.addLayer(layer.libraryLayer);
     }
 
     removeLayer(layer) {
         if (this._layers.has(layer)) {
             this._layers.delete(layer);
 
-            layer.setMap(null);
+            layer.map = null;
         }
     }
 
@@ -28,14 +50,6 @@ export default class AbstractMap {
 
     layerOnMap() {
         
-    }
-
-    getLayers() {
-        return Array.from(this._layers.keys());
-    }
-
-    getOptions() {
-        return this._options;
     }
 
     _resetMapContainer(container) {

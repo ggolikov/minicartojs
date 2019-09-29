@@ -4,64 +4,54 @@ export default class AbstractTileLayer {
     constructor(layerData, map) {
         let { type, options } = layerData;
         
-        this.setType(type);
-        this.setOptions(options);
-        this.setMap(map);
-    }
-
-    createLayer() {
-
-    }
-
-    setVisibility() {
-
-    }
-
-    update(options) {
-        this.setOptions(options);
-        this.redraw();
-    }
-
-    redraw() {
-
-    }
-
-    setType(type) {
         this._type = type;
-    }
-
-    setOptions(options) {
         this._options = options;
-    }
-
-    setMap(map) {
+        this._map = map;
+        this._options = options;
         this._map = map;
     }
 
-    getMap() {
+    get map() {
         return this._map;
     }
     
-    getLibraryMap() {
-        return this._map._map;
+    get libraryMap() {
+        return this._map.libraryMap;
     }
 
-    getLibraryLayer() {
-        return this._layer;
+    get libraryLayer() {
+        return this._libraryLayer;
     }
 
-    getType() {
+    get type() {
         return this._type;
     }
 
-    getOptions() {
+    get options() {
         return this._options;
+    }
+    
+    set map(map) {
+        this._map = map;
+    }
+
+    set libraryLayer(layer) {
+        this._libraryLayer = layer;
+    }
+
+    set options(options) {
+        this._options = options;
+    }
+
+    update(options) {
+        this.options = options;
+        this.redraw();
     }
 
     getUrlTemplate() {
-        let map = this.getMap(),
-            type = this.getType(),
-            options = this.getOptions();
+        let map = this.map,
+            type = this.type,
+            options = this.options;
 
         if (type === 'tiled') {
             return Promise.resolve(options.urlTemplate)
@@ -82,8 +72,7 @@ export default class AbstractTileLayer {
             return fetch(MAPS_API_URL, requestOptions)
                 .then(res => res.json())
                 .then(res => {
-                    let mapOptions = map.getOptions(),
-                        { maps_api_config } = mapOptions,
+                    let { maps_api_config } = map.options,
                         { user_name } = maps_api_config;
 
                     options.urlTemplate = `${TEMPLATE_URL}/${user_name}/api/v1/map/${res.layergroupid}/{z}/{x}/{y}.png`;
@@ -91,5 +80,17 @@ export default class AbstractTileLayer {
                     return this;
                 });
         }
+    }
+    
+    redraw() {
+
+    }
+
+    createLayer() {
+
+    }
+
+    setVisibility() {
+
     }
 }

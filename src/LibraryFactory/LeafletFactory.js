@@ -3,10 +3,6 @@ import { LeafletMap } from '../Map';
 import { LeafletTileLayer } from '../TileLayer';
 
 export default class LeafletFactory extends AbstractFactory {
-    constructor() { 
-        super();
-    }
-
     createMap(container, options) {
         return new LeafletMap(container, options);
     }

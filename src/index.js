@@ -1,7 +1,23 @@
-import LibraryFactory from './LibraryFactory';
 import EventTarget from './EventTarget';
+import libraryFactory from './LibraryFactory';
 
 class MiniCarto extends EventTarget {
+    get library() {
+        return this._library;
+    }
+
+    get config() {
+        return this._config;
+    }
+
+    get map() {
+        return this._map;
+    }
+
+    get container() {
+        return this._container;
+    }
+
     init(config = {}, container, library = 'leaflet') {
         this._container = container;
         this._config = config;
@@ -9,8 +25,8 @@ class MiniCarto extends EventTarget {
     }
 
     setLibrary(library) {
-        let factory = LibraryFactory.createFactory(library),
-            config = this.getConfig(),
+        let factory = libraryFactory.createFactory(library),
+            { config } = this,
             { center, zoom, maps_api_config } = config;
         
         center = Array.isArray(center) ? center : JSON.parse(center);
@@ -35,19 +51,10 @@ class MiniCarto extends EventTarget {
                 this._map = map;
                 
                 this.fire('setLibrary');
+            })
+            .catch((error) => {
+                console.log(error);
             });
-    }
-
-    getContainer() {
-        return this._container;
-    }
-
-    getMap() {
-        return this._map;
-    }
-
-    getConfig() {
-        return this._config;
     }
 }
 
