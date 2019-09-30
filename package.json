@@ -1,6 +1,6 @@
 {
   "name": "minicarto",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "miniCarto.js demo",
   "repository": "https://github.com/ggolikov/minicartojs",
   "main": "./dist/index.js",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup -c",
-    "watch": "rollup -c -w",
+    "watch": "rollup -c",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve demo",
     "deploy": "gh-pages -d demo"
