@@ -1,9 +1,9 @@
 {
-  "name": "mini-carto-js",
-  "version": "0.2.0",
-  "description": "mini carto.js demo",
+  "name": "minicarto",
+  "version": "0.1.0",
+  "description": "miniCarto.js demo",
   "repository": "https://github.com/ggolikov/minicartojs",
-  "main": "./src/index.js",
+  "main": "./dist/index.js",
   "author": "Grigory Golikov gr.golikov@gmail.com",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,8 @@
     "watch": "rollup -c -w",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve demo",
-    "deploy": "gh-pages -d demo"
+    "deploy": "gh-pages -d demo",
+    "prepublish": "rollup src/index.js -o dist/index.js --format esm"
   },
   "dependencies": {
     "leaflet": "^1.4.0",

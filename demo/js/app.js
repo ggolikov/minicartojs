@@ -3,7 +3,7 @@ import config from './config.js';
 
 // DEBUG: 
 window.miniCarto = miniCarto;
-console.log(miniCarto);
+
 let container           = document.getElementById('mapContainer'),
     leafletCheckbox     = document.getElementById('leaflet'),
     openLayersCheckbox  = document.getElementById('openLayers'),

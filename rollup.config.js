@@ -3,16 +3,13 @@ import babel from 'rollup-plugin-babel';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 
-// `npm run build` -> `production` is true
-// `npm run dev` -> `production` is false
-const production = !process.env.ROLLUP_WATCH;
-
 export default {
-	input: 'demo/js/app.js',
+	input: 'src/index.js',
 	output: {
-		file: 'demo/js/bundle.js',
-		format: 'iife', // immediately-invoked function expression — suitable for <script> tags
-		sourcemap: true
+		file: 'dist/index.js',
+		format: 'esm', // immediately-invoked function expression — suitable for <script> tags
+		// format: 'iife', // immediately-invoked function expression — suitable for <script> tags
+		sourcemap: false
 	},
 	plugins: [
 		babel({
@@ -20,6 +17,6 @@ export default {
 		}),
 		resolve(), // tells Rollup how to find date-fns in node_modules
 		commonjs(), // converts date-fns to ES modules
-		production && terser() // minify, but only in production
+		terser() // minify, but only in production
 	]
 };

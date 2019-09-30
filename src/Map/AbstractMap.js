@@ -48,10 +48,6 @@ export default class AbstractMap {
         return this._layers.get(layer);
     }
 
-    layerOnMap() {
-        
-    }
-
     _resetMapContainer(container) {
         let innerContainer = document.createElement('div');
         
