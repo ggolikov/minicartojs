@@ -11,8 +11,7 @@
     "watch": "rollup -c -w",
     "dev": "npm-run-all --parallel start watch",
     "start": "serve demo",
-    "deploy": "gh-pages -d demo",
-    "prepublish": "rollup src/index.js -o dist/index.js --format esm"
+    "deploy": "gh-pages -d demo"
   },
   "dependencies": {
     "leaflet": "^1.4.0",
