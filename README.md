@@ -1,7 +1,7 @@
 # miniCarto.js
 
 MiniCarto is a mapping abstraction library, written according to [gist](https://gist.github.com/jimartincorral/d936859eaa09db025b9b7e89176a8ffb).
-## [Demo](https://ggolikov.github.io/minicarto.js)
+## [Demo](https://ggolikov.github.io/minicartojs)
 
 MiniCarto has three goals:
 - it takes configuration file with some properties and renders map and layers using one of popular mapping libraries. For demo I switch between Leaflet and OpenLayers. The design of miniCarto is abstract enough to easy add new mapping libraries easy (e.g. Google Maps or d3.js). 

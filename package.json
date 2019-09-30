@@ -1,6 +1,6 @@
 {
   "name": "minicarto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "miniCarto.js demo",
   "repository": "https://github.com/ggolikov/minicartojs",
   "main": "./dist/index.js",
