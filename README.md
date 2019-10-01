@@ -4,9 +4,11 @@ MiniCarto is a mapping abstraction library, written according to [gist](https://
 ## [Demo](https://ggolikov.github.io/minicartojs)
 
 MiniCarto has three goals:
-- it takes configuration file with some properties and renders map and layers using one of popular mapping libraries. For demo I switch between Leaflet and OpenLayers. The design of miniCarto is abstract enough to easy add new mapping libraries easy (e.g. Google Maps or d3.js). 
+- it takes configuration file with some properties and renders map and layers using one of popular mapping libraries. At demo page I switch between Leaflet and OpenLayers. The design of miniCarto is abstract enough to easy add new mapping libraries easy (e.g. Google Maps or d3.js). 
 - it handles map layers visibility using abstract TileLayer class (all layers in this demo are rendered as tiled layers)
 - it updates sql attribute of CartoDB tiled layer and rerenders it.
+
+To test library from console, I expose it at demo page into global namespace as `window.miniCarto`.
 
 ## Installation
 ```
@@ -43,4 +45,4 @@ hasLayer(layer `miniCarto.Layer`)| Checks if map has `layer` already.
 Method|Description
 ------|-------
 setVisibility(visible `Boolean`)| Handles layer visibility. 
-update(options `Object`)| Updates layer with options. Inside requests layer data and rtedraws it.
+update(options `Object`)| Updates layer with options. Inside requests layer data and redraws it.

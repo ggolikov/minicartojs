@@ -42,6 +42,8 @@ export default class AbstractMap {
 
             layer.map = null;
         }
+
+        this.libraryMap.removeLayer(layer.removeLayer);
     }
 
     hasLayer(layer) {
